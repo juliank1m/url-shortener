@@ -28,7 +28,3 @@ release_command = "sh -c 'python manage.py collectstatic --noinput && python man
   cpu_kind = 'shared'
   cpus = 1
   memory_mb = 1024
-
-[[statics]]
-  guest_path = '/code/static'
-  url_prefix = '/static/'
