@@ -36,3 +36,8 @@ function copyToClipboard() {
     document.getElementById("status").innerText = "Copy failed";
   });
 }
+
+function toggleKey() {
+  const input = document.getElementById("apiKey");
+  input.type = input.type === "password" ? "text" : "password";
+}

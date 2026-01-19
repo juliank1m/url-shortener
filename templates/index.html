@@ -22,7 +22,9 @@
 <body>
   <h1>URL Shortener</h1>
 
-  <input id="apiKey" placeholder="Paste API key" />
+  <input type="password" id="apiKey" placeholder="Paste API key" />
+  <button onclick="toggleKey()">Show / Hide</button>
+  
   <input id="urlInput" placeholder="https://example.com" />
   <button onclick="createLink()">Create</button>
 
