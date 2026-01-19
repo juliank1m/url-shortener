@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>URL Shortener</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      max-width: 480px;
+      margin: 4rem auto;
+    }
+    input, button {
+      width: 100%;
+      padding: 0.6rem;
+      margin: 0.4rem 0;
+    }
+    .result {
+      margin-top: 1rem;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Create Short Link</h2>
+
+<input id="apiKey" placeholder="API key" type="password" />
+<input id="url" placeholder="https://example.com" />
+<button onclick="createLink()">Create</button>
+
+<div class="result" id="result"></div>
+
+<script>
+  const apiKeyInput = document.getElementById("apiKey");
+  const urlInput = document.getElementById("url");
+  const result = document.getElementById("result");
+
+  // Remember key locally (optional but convenient)
+  apiKeyInput.value = localStorage.getItem("apiKey") || "";
+
+  async function createLink() {
+    const apiKey = apiKeyInput.value.trim();
+    const url = urlInput.value.trim();
+
+    if (!apiKey || !url) {
+      alert("Missing API key or URL");
+      return;
+    }
+
+    localStorage.setItem("apiKey", apiKey);
+
+    const res = await fetch("/api/links/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-ADMIN-TOKEN": apiKey
+      },
+      body: JSON.stringify({ url })
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      result.textContent = data.error || "Error";
+      return;
+    }
+
+    result.innerHTML = `
+      <strong>Short URL:</strong><br>
+      <a href="${data.short_url}" target="_blank">
+        ${data.short_url}
+      </a>
+    `;
+  }
+</script>
+
+</body>
+</html>

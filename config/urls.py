@@ -20,10 +20,11 @@ from links.views import create_link, redirect_link
 from django.http import HttpResponse
 
 def home(request):
-    return HttpResponse("URL Shortener is running. Try /admin or /<code>/")
+    html = Path("static/index.html").read_text()
+    return HttpResponse(html)
 
 urlpatterns = [
-    path("", home, name="home"),
+    path("", home),
     path("admin/", admin.site.urls),
     path("api/links/", create_link, name="create_link"),
     path("<str:code>/", redirect_link, name="redirect_link"),

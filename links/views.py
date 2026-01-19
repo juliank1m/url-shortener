@@ -46,7 +46,7 @@ def create_link(request):
     else:
         return JsonResponse({"error": "Could not generate a unique code"}, status=500)
     
-    short_url = request.build_absolute_uri(f"/{link.code}")
+    short_url = request.build_absolute_uri(f"/l/{link.code}")
 
     return JsonResponse(
         {
