@@ -1,9 +1,26 @@
-## Development - URL Shortener
-This project is designed to be run via Docker Compose.
+# go.juliankim.dev
 
-Environment variables are documented in `.env.example`.
+A personal URL shortener built with Django and PostgreSQL.
 
-Core functionality:
-- `/api/links/` — token-protected link creation
-- `/<code>` — redirect with analytics
-- `/admin/` — internal management UI
+## Features
+- Collision-safe short code generation
+- Admin dashboard for link management
+- Click tracking
+- Soft-disable links (`is_active`)
+- API-protected link creation
+- Deployed with Fly.io + Cloudflare
+
+## Tech Stack
+- Django
+- PostgreSQL
+- Docker
+- Fly.io
+- Cloudflare DNS
+
+## API
+`POST /api/links/`
+
+```json
+{
+  "url": "https://example.com"
+}
