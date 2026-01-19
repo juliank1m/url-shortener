@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from links.views import create_link, redirect_link
+from django.http import HttpResponse
 
 def home(request):
     return HttpResponse("URL Shortener is running. Try /admin or /<code>/")
@@ -25,5 +26,5 @@ urlpatterns = [
     path("", home, name="home"),
     path("admin/", admin.site.urls),
     path("api/links/", create_link, name="create_link"),
-    path("l/<str:code>/", redirect_link, name="redirect_link"),
+    path("<str:code>/", redirect_link, name="redirect_link"),
 ]
