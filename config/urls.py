@@ -19,12 +19,8 @@ from django.urls import path
 from links.views import create_link, redirect_link
 from django.http import HttpResponse
 
-def home(request):
-    html = Path("static/index.html").read_text()
-    return HttpResponse(html)
-
 urlpatterns = [
-    path("", home),
+    path("", TemplateView.as_view(template_name="index.html"), name="home"),
     path("admin/", admin.site.urls),
     path("api/links/", create_link, name="create_link"),
     path("<str:code>/", redirect_link, name="redirect_link"),
