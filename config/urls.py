@@ -25,5 +25,5 @@ urlpatterns = [
     path("", TemplateView.as_view(template_name="index.html"), name="home"),
     path("admin/", admin.site.urls),
     path("api/links/", create_link, name="create_link"),
-    path("<str:code>/", redirect_link, name="redirect_link"),
+    path("l/<str:code>/", redirect_link, name="redirect_link"),
 ]
